@@ -39,6 +39,8 @@ def get_standard_account_id(session, cId):
 
 app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 
+app.config['suppress_callback_exceptions'] = True
+
 app.layout = html.Div(children=[
     html.H1('Sbanken Dashboard'),
 
@@ -52,21 +54,38 @@ app.layout = html.Div(children=[
 
     html.Br(),
 
-    dcc.Checklist(
-        id="switches",
-        options=[
-            {"label": "Enable Sorting", "value": "sort"},
-            {"label": "Enable Filtering", "value": "filter"},
-        ],
-        values=["sort"],
-        labelStyle={"display": "inline-block"}
-    ),
+    dcc.Tabs(
+        id="tabs",
+        value="overview",
+        children=
+        [
+            dcc.Tab(label="Overview", value="overview", children=
+                    [
+                        html.H5("Nothing to see yet!")
+                    ]
 
-    html.Br(),
+            ),
+            dcc.Tab(label="Transactions", value="transactions", children=
+                    [
+                        dcc.Checklist(
+                            id="switches",
+                            options=[
+                                {"label": "Enable Sorting", "value": "sort"},
+                                {"label": "Enable Filtering", "value": "filter"},
+                            ],
+                            values=["sort"],
+                            labelStyle={"display": "inline-block"}
+                        ),
 
-    dash_table.DataTable(
-        id="table"
-    )
+                        html.Br(),
+
+                        dash_table.DataTable(
+                            id="table"
+                        ),
+                    ]
+            ),
+        ]),
+
 ])
 
 
