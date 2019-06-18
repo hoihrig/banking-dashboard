@@ -72,12 +72,23 @@ def categorize_transactions(transactions):
     return stransactions
 
 
-def sum_categories(stransactions):
+def sum_income_categories(stransactions):
     sums = {}
     for category, entry in stransactions.items():
-        sums[category] = 0
         for item in entry:
-            sums[category] = sums[category] + item["amount"]
+            if item["amount"] > 0:
+                sums[category] = 0
+                sums[category] = sums[category] + item["amount"]
+    return sums
+
+
+def sum_expense_categories(stransactions):
+    sums = {}
+    for category, entry in stransactions.items():
+        for item in entry:
+            if item["amount"] < 0:
+                sums[category] = 0
+                sums[category] = sums[category] + abs(item["amount"])
     return sums
 
 
