@@ -67,7 +67,7 @@ def generate_pie(datasets, dataset):
 app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 
 app.layout = html.Div(children=[
-    html.H1('Sbanken Dashboard'),
+    html.H1('Banking Dashboard'),
 
     dcc.DatePickerRange(
         id="transaction-range",
@@ -142,7 +142,7 @@ def fetch_process_data(n_clicks, start_date, end_date):
     if n_clicks is None:
         return
 
-    transactions = sb.get_transactions(http_session, customerId, accountId, start_date, end_date, fake=True)
+    transactions = sb.get_transactions(http_session, customerId, accountId, start_date, end_date, fake=False)
     transactions = sanitize_transactions(transactions, "cardDetails")
 
     df = pd.DataFrame.from_dict(transactions, orient="columns")
@@ -246,12 +246,12 @@ def update_table_capabilities(values):
 
 
 if __name__ == '__main__':
-    import api_settings
+    import app_settings
 
-    http_session = sb.create_authenticated_http_session(api_settings.CLIENTID, api_settings.SECRET)
+    http_session = sb.create_authenticated_http_session(app_settings.CLIENTID, app_settings.SECRET)
 
-    customerId = api_settings.CUSTOMERID
+    customerId = app_settings.CUSTOMERID
 
     accountId = get_standard_account_id(http_session, customerId)
 
-    app.run_server(debug=True)
+    app.run_server(host='0.0.0.0', debug=False)
