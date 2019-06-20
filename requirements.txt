@@ -1,0 +1,13 @@
+dash==0.43.0
+dash-renderer==0.24.0
+dash-html-components==0.16.0
+dash-core-components==0.48.0
+dash-daq==0.1.0
+dash-table==3.7.0
+plotly==3.10.0
+requests-oauthlib==1.2.0
+numpy==1.16.4
+pandas==0.24.2
+python-dateutil==2.8.0
+pytz==2019.1
+six==1.12.0
