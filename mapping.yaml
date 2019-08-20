@@ -1,0 +1,72 @@
+rules:
+  - name: Mat
+    field: text
+    expressions:
+      - KIWI
+      - MENY
+      - COOP
+      - EXTRA
+      - OBS
+  - name: Abonnement
+    field: text
+    expressions:
+      - Adresseavisen
+      - Spotify
+  - name: Bakeri
+    field: text
+    expressions:
+      - DROMEDAR
+      - BAKERI
+      - BRØD
+      - BAKERN
+  - name: Hurtigmat
+    field: text
+    expressions:
+      - Deli
+  - name: Parking
+    field: text
+    expressions:
+      - Parkering
+      - Europark
+      - parker
+      - Parke
+  - name: Transport
+    field: text
+    expressions:
+      - ATB
+      - Ruter
+  - name: Forsikring
+    field: text
+    expressions:
+      - gjensidige
+  - name: Strøm
+    field: text
+    expressions:
+      - Tibber
+      - Trønderenergi
+      - fortum
+  - name: Alkohol
+    field: text
+    expressions:
+      - Vinmonopolet
+  - name: Telecoms
+    field: text
+    expressions:
+      - Telenor
+      - NTE Marked
+  - name: Sport
+    field: text
+    expressions:
+      - kampsp
+      - 3t
+  - name: Kreditkort
+    field: text
+    expressions:
+      - SEB KORT
+      - EUROCARD
+  - name: Bensin
+    field: text
+    expressions:
+      - YX
+      - BEST
+      - CIRCLE K

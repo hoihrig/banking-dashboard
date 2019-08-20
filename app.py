@@ -7,6 +7,8 @@ import dash_html_components as html
 from datetime import datetime as dt
 import sbanken_data as sb
 import pandas as pd
+import os.path
+import yaml
 
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 
@@ -38,6 +40,19 @@ table_columns = [
     },
 ]
 
+
+def map_transactions(df):
+    if os.path.exists("mapping.yaml"):
+        mapping_rules = yaml.load(open("mapping.yaml"))
+
+        df.insert(len(df.columns),"mapped_category","unknown")
+        for data_index, data_row in df.iterrows():
+            for i in mapping_rules["rules"]:
+                for entry in i["expressions"]:
+                    if entry.lower() in data_row[i["field"]].lower():
+                        df.at[data_index, "mapped_category"] = i["name"]
+
+    return df
 
 
 def create_columns(df):
@@ -170,6 +185,7 @@ def fetch_process_data(n_clicks, start_date, end_date):
     transactions = sanitize_transactions(transactions, "cardDetails")
 
     df = pd.DataFrame.from_dict(transactions, orient="columns")
+    df = map_transactions(df)
     categorized_transactions = sb.categorize_transactions(transactions)
 
     datasets = {
