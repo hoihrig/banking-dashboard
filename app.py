@@ -10,19 +10,43 @@ import pandas as pd
 
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 
+table_columns = [
+    {
+        "id": "accountingDate",
+        "name": "Accounting Date",
+        "format": ""
+    },
+    {
+        "id": "transactionType",
+        "name": "Type",
+        "format": ""
+    },
+    {
+        "id": "mapped_category",
+        "name": "Category",
+        "format": ""
+    },
+    {
+        "id": "text",
+        "name": "Text",
+        "format": ""
+    },
+    {
+        "id": "amount",
+        "name": "Amount",
+        "format": ""
+    },
+]
+
+
 
 def create_columns(df):
     col = []
-    for i in df.columns:
-        if i in [
-            "accountingDate",
-            "amount",
-            "text",
-            "transactionType"
-        ]:
-            col.append({"name": i, "id": i, "hidden": False})
-        else:
-            col.append({"name": i, "id": i, "hidden": True})
+
+    for i in table_columns:
+        if i["id"] in df.columns:
+            col.append({"name": i["name"], "id": i["id"]})
+
     return col
 
 
